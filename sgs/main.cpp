@@ -7,7 +7,7 @@ int main(){
 	char flag = 0;
 	int power = 0;
 	double value;
-	std::string s, temp, numerator = "", denominator = "";
+	std::string s, temp, numerator, denominator;
 
 	std::cout << "Введите величину с её полной размерностью (для справки введите q): ";
 
