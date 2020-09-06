@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <iomanip>
 #include <cmath>
 
 int main(){
@@ -30,8 +29,8 @@ int main(){
 		if(D < 0){
 			s = "No solution";
 		}else{
-			x1 = (-b*b - sqrt(D))/(2*a);
-			x2 = (-b*b + sqrt(D))/(2*a);
+			x1 = (-b - sqrt(D))/(2*a);
+			x2 = (-b + sqrt(D))/(2*a);
 		}
 
 	}
