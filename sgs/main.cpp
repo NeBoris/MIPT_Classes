@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 
-#define c 29979245800
 
 int main(){
 	char flag = 0;
