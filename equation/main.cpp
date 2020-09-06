@@ -16,13 +16,8 @@ int main(){
 		}else{
 			x1 = x2 = -c/b;
 		}
-	}else if(b == 0){
-		if(-c/a < 0){
-			s = "There are no valid roots";
-		}else{
-			x1 = -sqrt(-c/a);
-			x2 = sqrt(-c/a);
-		}
+	}else if(b == 0 && -c/a < 0){
+		s = "There are no valid roots";
 	}else{
 		D = b*b - 4*a*c;
 
@@ -36,7 +31,12 @@ int main(){
 	}
 
 	if(s.empty()){
-		std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
+		if(x1 != x2){
+			std::cout << "x1 = " << x1 << "\nx2 = " << x2 << std::endl;
+		}else{
+			std::cout << "x = " << std::endl;
+		}
+
 	}else{
 		std::cout << s;
 	}
