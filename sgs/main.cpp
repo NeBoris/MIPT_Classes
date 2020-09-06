@@ -107,8 +107,11 @@ int main(){
 			temp.clear();
 		}
 	}
-
-	std::cout << std::setprecision(2) << value << "*" << 10 << "^" << power << " ";
+	if(power != 0){
+		std::cout << std::setprecision(2) << value << "*" << 10 << "^" << power << " ";
+	}else{
+		std::cout << std::setprecision(2) << value << " ";
+	}
 
 	if(denominator.empty()){
 		if(!numerator.empty()){
