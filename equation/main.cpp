@@ -4,7 +4,7 @@
 
 int main(){
 	double a, b, c, D, x1, x2;
-	std::string s = "";
+	std::string s;
 
 	std::cout << "Enter the coefficients of the square equation (a,b,c): ";
 
