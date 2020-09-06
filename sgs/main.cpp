@@ -9,14 +9,14 @@ int main(){
 	double value;
 	std::string s, temp, numerator = "", denominator = "";
 
-	std::cout << "Введите величину с её полной размерностью (для справки введите q): ";
+	std::cout << "Enter the value with its full dimension (for reference, enter q): ";
 
 	if(std::cin.peek() == 'q'){
-		std::cout << "Правила ввода:\n"
-				<< "1. Между величиной и размерностью должен стоять один пробел\n"
-				<< "2. В размерности числитель отделяется от знаменателя дробью (/), а элементы в обоих знаком умножения(*)\n"
-				<< "3. Форма записи со степенью десяти записывается в виде \"3.14*10^14\"\n"
-				<<"Введите данные: ";
+		std::cout << "Entry rules:\n"
+				<< "1. There should be one space between the value and the dimension\n"
+				<< "2. In dimension, the numerator is separated from the denominator by a fraction ( / ), and the elements in both are separated by a multiplication sign(*)\n"
+				<< "3. An entry form with a power of ten is written as \"3.14*10^14\"\n"
+				<<"Enter data: ";
 		std::cin.ignore(1);
 	}
 
@@ -44,46 +44,46 @@ int main(){
 		}else{
 
 
-			if(temp == "Кл" || temp == "А"){
+			if(temp == "Kl" || temp == "A"){
 				value /= 10;
 				value *= 3;
 				power += 10;
-				if(temp == "А"){
-					denominator += "c";
+				if(temp == "A"){
+					denominator += "s";
 				}
-				temp = "ед.СГСЭ";
-			}else if(temp == "Вб" || temp == "В"){
+				temp = "ed.SGSE";
+			}else if(temp == "Vb" || temp == "V"){
 				power += 2;
 				value /= 3;
-				if(temp == "Вб"){
-					temp == "Мкс";
+				if(temp == "Vb"){
+					temp == "Mks";
 				}else{
 					temp.clear();
 				}
-			}else if(temp == "м"){
+			}else if(temp == "m"){
 				power += 2;
-				temp = "см";
-			}else if(temp == "мм"){
+				temp = "sm";
+			}else if(temp == "mm"){
 				if(power >= 1){
 					power -= 1;
 				}else{
 					value /= 10;
 				}
-				temp = "см";
-			}else if(temp == "мин"){
+				temp = "sm";
+			}else if(temp == "min"){
 				value *= 6;
 				power += 1;
-				temp = "с";
-			}else if(temp == "ч"){
+				temp = "s";
+			}else if(temp == "h"){
 				value *= 3.6;
 				power += 3;
-				temp = "с";
-			}else if(temp == "кг"){
+				temp = "s";
+			}else if(temp == "kg"){
 				power += 3;
-				temp = "г";
-			}else if(temp == "Н"){
+				temp = "g";
+			}else if(temp == "N"){
 				power += 5;
-				temp = "дин";
+				temp = "din";
 			}
 
 			if(flag == 0){

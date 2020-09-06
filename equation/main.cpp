@@ -7,19 +7,19 @@ int main(){
 	double a, b, c, D, x1, x2;
 	std::string s = "";
 
-	std::cout << "Введите коэффициенты квадратног уравнения (a,b,c): ";
+	std::cout << "Enter the coefficients of the square equation (a,b,c): ";
 
 	std::cin >> a >> b >> c;
 
 	if(a == 0){
 		if(b == 0){
-			s = "Решений нет";
+			s = "No solution";
 		}else{
 			x1 = x2 = -c/b;
 		}
 	}else if(b == 0){
 		if(-c/a < 0){
-			s = "Действительных корней нет";
+			s = "There are no valid roots";
 		}else{
 			x1 = -sqrt(-c/a);
 			x2 = sqrt(-c/a);
@@ -28,7 +28,7 @@ int main(){
 		D = b*b - 4*a*c;
 
 		if(D < 0){
-			s = "Решений нет";
+			s = "No solution";
 		}else{
 			x1 = (-b*b - sqrt(D))/(2*a);
 			x2 = (-b*b + sqrt(D))/(2*a);
