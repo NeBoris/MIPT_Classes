@@ -140,7 +140,8 @@ int main(){
 	std::vector<std::vector<double>> matrix;
 	std::vector<double> temp;
 	double c;
-	int N = 3, flag = 1;					//flag is used to change rows if dioganal element is 0
+	int N = 3;
+	int flag = 1;					//flag is used to not go over the matrix while changing rows
 	std::stringstream s("");
 
 
