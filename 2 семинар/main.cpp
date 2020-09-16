@@ -6,11 +6,14 @@
 //#include <sstream>
 #include <stdexcept>
 
+bool is_equal(const double &lhs, const double &rhs){
+	return lhs == rhs;
+}
 
 //rint - print matrix
 void print(const std::vector<std::vector<double>> &matrix){
 	for(const auto &g : matrix){
-		for(const auto &c : g){
+		for(const auto c : g){
 			std::cout << std::setw(5) << std::right;
 			if(c == -0){
 				std::cout << 0 << " ";
@@ -28,10 +31,10 @@ void print_solution(const std::vector<std::vector<double>> &matrix){
 	std::cout << "Partial solution: \n";
 	for(const auto &g : matrix){
 		std::cout << std::setw(5) << std::right;
-		if(g[int(g.size()) - 1] == -0){
+		if(g[g.size() - 1] == -0){
 			std::cout << 0;
 		}else{
-			std::cout << g[int(g.size()) - 1];
+			std::cout << g[g.size() - 1];
 		}
 		std::cout << '\n';
 	}
@@ -39,7 +42,7 @@ void print_solution(const std::vector<std::vector<double>> &matrix){
 	std::cout << "\nFundamental matrix:\n";
 
 	for(const auto &g : matrix){
-		for(auto i = 0; i < int(g.size()) - 1; ++i){
+		for(auto i = 0U; i < g.size() - 1; ++i){
 			std::cout << std::setw(5) << std::right;
 			if(g[i] == -0){
 				std::cout << 0 << " ";
@@ -60,15 +63,15 @@ void divide(std::vector<double> & vec, double n){
 
 //clear_column - subtracts the given row from each
 //				 row multiplied by the corresponding coefficient
-void clear_column(std::vector<std::vector<double>> &matrix, const int &row, const int &column){
+void clear_column(std::vector<std::vector<double>> &matrix, unsigned int row, unsigned int column){
 	int temp;
 
-	for(int i = 0; i < int(matrix.size()); ++i){
+	for(auto i = 0U; i < matrix.size(); ++i){
 		temp = matrix[i][column];
 		if(i == row){
 			continue;
 		}
-		for(int j = 0; j < int(matrix[i].size()); ++j){
+		for(auto j = 0U; j < matrix[i].size(); ++j){
 			matrix[i][j] -= matrix[row][j] * temp;
 		}
 	}
@@ -79,34 +82,34 @@ void clear_column(std::vector<std::vector<double>> &matrix, const int &row, cons
 std::vector<std::vector<double>> solution(const std::vector<std::vector<double>> &matrix){
 	std::vector<std::vector<double>> fundam;
 	std::vector<double> temp;
-	int row, column;
+	unsigned int row, column;
 
-	for(row = 0, column = 0; row < int(matrix.size()) &&
-	column < int(matrix[0].size()); ++row, ++column){
-		if(matrix[row][column] != 1.0){
+	for(row = 0U, column = 0U; row < matrix.size() &&
+	column < matrix[0].size(); ++row, ++column){
+		if(!is_equal(matrix[row][column], 1.0)){
 			break;
 		}
 	}
-	if(row == int(matrix.size())){
+	if(row == matrix.size()){
 		--row;
 	}
 
 	//print(matrix);
 	//std::cout << "\n" << row << " " << column << std::endl;
 	//check for incorrect system
-	for(int i = row; i < int(matrix.size()); ++i){
-		if(matrix[i][int(matrix[0].size()) - 1] != 0){
+	for(auto i = row; i < matrix.size(); ++i){
+		if(matrix[i][matrix[0].size() - 1] != 0){
 			throw std::invalid_argument("The system is incompatible");
 		}
 	}
 
-	if(column == int(matrix[0].size())){
+	if(column == matrix[0].size()){
 		--column;
 	}
 
-	for(int j = 0; j < row; ++j){
-		for(int i = column; i < int(matrix[0].size()); ++i){
-			if(i == int(matrix[0].size()) - 1){
+	for(auto j = 0U; j < row; ++j){
+		for(auto i = column; i < matrix[0].size(); ++i){
+			if(i == matrix[0].size() - 1){
 				temp.push_back(matrix[j][i]);
 			}else{
 				temp.push_back(-matrix[j][i]);
@@ -116,9 +119,9 @@ std::vector<std::vector<double>> solution(const std::vector<std::vector<double>>
 		temp.clear();
 	}
 
-	for(int j = 0; j < int(matrix.size()) - row; ++j){
-		for(int i = 0; i < int(matrix[0].size()) - column; ++i){
-			if(i == int(matrix[0].size()) - column - 1){
+	for(auto j = 0U; j < matrix.size() - row; ++j){
+		for(auto i = 0U; i < matrix[0].size() - column; ++i){
+			if(i == matrix[0].size() - column - 1){
 				temp.push_back(0);
 				continue;
 			}
@@ -197,13 +200,12 @@ int main(){
 		temp.clear();
 	}
 
-	for(auto column = 0, row = 0; column < int(matrix[row].size()) &&
-	row < int(matrix.size()); ++column,++row){
+	for(auto column = 0U, row = 0U; column < matrix[row].size() && row < matrix.size(); ++column, ++row){
 
 			//std::cout << row << "-" << column << " '" << matrix[row][column] << "'" << std::endl;
 			if(matrix[row][column] == 0)	//swap the rows if dioganal element in current one is 0
 			{
-				if(row != int(matrix.size()) - flag){
+				if(row != matrix.size() - flag){
 					std::swap(matrix[row], matrix[row+flag]);
 					--row;
 					--column;
