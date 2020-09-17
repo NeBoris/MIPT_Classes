@@ -3,6 +3,15 @@
 #include <cmath>
 #include <iomanip>
 
+int find_in_vector(const std::vector<unsigned int> &v, unsigned int k){
+	for(auto c = 0U; c < v.size(); ++c){
+		if(v[c] == k){
+			return c;
+		}
+	}
+	return -1;
+}
+
 void print(const std::vector< std::vector<double> > &matrix){
 	for(const auto c : matrix){
 		for(const auto x : c){
@@ -30,8 +39,8 @@ void try_again(int* N, int* M){
 void get_solution(const std::vector< std::vector<double>> &matrix, const std::vector<unsigned int> &zero_columns,
 		unsigned int* size_c, unsigned int* size_e){
 
-	std::vector< std::vector<double>> fundamental_matrix(*size_e);
-	std::vector<double> partial_sol(*size_e, 0.0);
+	std::vector< std::vector<double>> fundamental_matrix(*size_e - 1);
+	std::vector<double> partial_sol(*size_e - 1, 0.0);
 
 	if(zero_columns.empty()){
 
@@ -50,6 +59,22 @@ void get_solution(const std::vector< std::vector<double>> &matrix, const std::ve
 			}
 
 		}
+	}else{
+		for(auto i = 0U, k = 0U; k < *size_c && (i < *size_e - 1); ++i, ++k){
+			if(find_in_vector(zero_columns,i) == -1){
+				partial_sol[i] = matrix[k].back();
+				for(auto c : zero_columns){
+					fundamental_matrix[i].push_back(matrix[k][c] == 0 ? matrix[k][c] : -matrix[k][c]);
+				}
+			}else{
+				partial_sol[i] = 0.0;
+				for(auto z = 0U; z < zero_columns.size(); ++z){
+					find_in_vector(zero_columns,i)  == int(z) ? fundamental_matrix[i].push_back(1.0) : fundamental_matrix[i].push_back(0.0);
+				}
+				--k;
+			}
+		}
+
 	}
 
 	std::cout << "Partial solution:\n";
@@ -63,19 +88,19 @@ void get_solution(const std::vector< std::vector<double>> &matrix, const std::ve
 
 int main(){
 	double* temp = new double;
-	int* N = new int;//(3); //amount of equations
-	int* M = new int;//(4); //amount of variables
+	int* N = new int(3); //amount of equations
+	int* M = new int(6); //amount of variables
 	std::stringstream s("");
 
 	std::cout << "Enter amount of equations in a system and number of variables: ";
-	std::cin >> *N >> *M;
+	//std::cin >> *N >> *M;
 	if(*N > *M){
 		try_again(N, M);
 	}
 
 
 	//s << 1 << 2 << 3 << 4 << 2 << 5 << 17 << 0 << 3 << -2 << 8 << 1;
-	s << "1 0 0 4 5 1 0 1 0 7 8 10 0 0 1 4 3 12";
+	s << "1 4 2 2 1 -5 1 -2 2 -2 -1 7 1 2 0 2 -1 -3";
 
 
 
@@ -99,24 +124,25 @@ int main(){
 	unsigned int* size_e = new unsigned int(matrix[0].size());
 	unsigned int* size_c = new unsigned int(matrix.size());
 
-	auto i = 0U;
-	std::vector<unsigned int> zero_columns;
 
-	for(; i < *size_e && i < *size_c; ++i){
-		if(is_equal(matrix[i][i], 0.0)){
+	std::vector<unsigned int> zero_columns;
+	auto k = 0U;
+	for(auto i = 0U; k < *size_e - 1 && i < *size_c; ++i, ++k){
+		if(is_equal(matrix[i][k], 0.0)){
 			auto j = 0U;
 			zero_columns.empty() ? j = i + 1U : j = zero_columns[0];
-			for(; j < *size_c && is_equal(matrix[j][i], 0.0); ++j);
+			for(; j < *size_c && is_equal(matrix[j][k], 0.0); ++j);
 
 			if(j == *size_c){
-				zero_columns.push_back(i);
+				zero_columns.push_back(k);
+				--i;
 				continue;
 			}
 			std::swap(matrix[i], matrix[j]);
 		}
-		double k = matrix[i][i];
+		double t = matrix[i][k];
 		for(auto m = 0U; m < *size_e; ++m){
-			matrix[i][m] /= k;
+			matrix[i][m] /= t;
 		}
 
 
@@ -124,10 +150,17 @@ int main(){
 			if(j == i){
 				continue;
 			}
-			double k = matrix[j][i];
+			double t = matrix[j][k];
 			for(auto m = 0U; m < *size_e; ++m){
-				matrix[j][m] -= k*matrix[i][m];
+				matrix[j][m] -= t*matrix[i][m];
 			}
+		}
+	}
+
+	if(k < *size_e){
+		while(k != *size_e - 1){
+			zero_columns.push_back(k);
+			++k;
 		}
 	}
 
