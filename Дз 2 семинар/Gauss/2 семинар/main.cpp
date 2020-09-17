@@ -137,7 +137,6 @@ int main() {
 		//check diagonal elemnts
 		if (is_equal(matrix[i][k], 0.0)) {
 			auto j = 0U;
-			zero_columns.empty() ? j = i + 1U : j = zero_columns[0];
 			for (; j < size_c && is_equal(matrix[j][k], 0.0); ++j);
 
 			if (j == size_c) {
