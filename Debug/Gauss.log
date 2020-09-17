@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\2 семинар\main.cpp(102,9): warning C4101: temp: неиспользованная локальная переменная
+  Gauss.vcxproj -> C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Debug\Gauss.exe
