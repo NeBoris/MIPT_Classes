@@ -88,9 +88,10 @@ void get_solution(const std::vector< std::vector<double>> &matrix, const std::ve
 
 int main(){
 	double* temp = new double;
-	int* N = new int(3); //amount of equations
-	int* M = new int(6); //amount of variables
+	int* N = new int(4); //amount of equations
+	int* M = new int(5); //amount of variables
 	std::stringstream s("");
+	unsigned int row = 0U;
 
 	std::cout << "Enter amount of equations in a system and number of variables: ";
 	//std::cin >> *N >> *M;
@@ -100,7 +101,7 @@ int main(){
 
 
 	//s << 1 << 2 << 3 << 4 << 2 << 5 << 17 << 0 << 3 << -2 << 8 << 1;
-	s << "1 4 2 2 1 -5 1 -2 2 -2 -1 7 1 2 0 2 -1 -3";
+	s << "1 0 0 3 1 0 1 0 4 2 0 0 1 5 3 0 0 0 0 4";
 
 
 
@@ -127,7 +128,7 @@ int main(){
 
 	std::vector<unsigned int> zero_columns;
 	auto k = 0U;
-	for(auto i = 0U; k < *size_e - 1 && i < *size_c; ++i, ++k){
+	for(auto i = 0U; k < *size_e - 1 && i < *size_c; ++i, ++k, ++row){
 		if(is_equal(matrix[i][k], 0.0)){
 			auto j = 0U;
 			zero_columns.empty() ? j = i + 1U : j = zero_columns[0];
@@ -136,6 +137,7 @@ int main(){
 			if(j == *size_c){
 				zero_columns.push_back(k);
 				--i;
+				--row;
 				continue;
 			}
 			std::swap(matrix[i], matrix[j]);
@@ -164,12 +166,18 @@ int main(){
 		}
 	}
 
-	if(!zero_columns.empty()){
+	/*if(!zero_columns.empty()){
 		for(const auto c : zero_columns){
 			std::cout << c << " ";
 		}
-	}
+	}*/
 	std::cout << '\n';
+
+	if(row < *size_c){
+		std::cout << "the system is incompatible";
+		return 0;
+	}
+
 
 	print(matrix);
 
