@@ -6,7 +6,7 @@ std::size_t search(const std::vector<int>& v, int key) {
 	std::size_t right = v.size() - 1;
 	std::size_t mid = 0;
 	
-	while (v[mid] != key && left == right) {
+	while (v[mid] != key && left != right) {
 		mid = left + (right - left) / 2;
 
 		if (key > v[mid]) {
