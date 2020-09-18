@@ -4,19 +4,20 @@
 std::size_t search(const std::vector<int>& v, int key) {
 	std::size_t left = 0;
 	std::size_t right = v.size() - 1;
-	std::size_t mid;
+	std::size_t mid = 0;
 	
-	while (true) {
-		mid = (right + left) / 2;
+	while (v[mid] != key && left == right) {
+		mid = left + (right - left) / 2;
 
 		if (key > v[mid]) {
 			left = mid + 1;
 		}
-		else if (key < v[mid]) {
+		else{
 			right = mid - 1;
 		}
-		return mid;
 	}
+	
+	return left == right ? v[left] : v[mid];
 }
 
 int main()
