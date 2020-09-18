@@ -6,24 +6,18 @@ std::size_t search(const std::vector<int>& v, int key) {
 	std::size_t right = v.size() - 1;
 	std::size_t mid = 0;
 	
-	while (right - left > 1) {
+	while (v[mid] != key && left != right) {
 		mid = left + (right - left) / 2;
 
-		if (key >= v[mid]) {
-			left = mid;
+		if (key > v[mid]) {
+			left = mid + 1;
 		}
 		else{
-			right = mid;
+			right = mid - 1;
 		}
 	}
 	
-	if (v[right] == key) {
-		std::cout << "The index of this element is " << mid;
-	}
-	else {
-		std::cout << "There is no that element!";
-	}
-	
+	return left == right ? v[left] : v[mid];
 }
 
 int main()
@@ -44,8 +38,12 @@ int main()
 	std::cout << "What element do you want to find in array? ";
 	std::cin >> key;
 
-	search(v, key);
-	
+	if (key >= v[0] && key <= v.back()) {
+		std::cout << "The index of this element is " << search(v, key);
+	}
+	else {
+		std::cout << "There is no that element!";
+	}
 	
 
 
