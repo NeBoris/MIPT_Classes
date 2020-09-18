@@ -17,11 +17,9 @@ int main()
         std::cin >> c;
     }
 
-    for (auto i = 0U; i < arr.size(); ++i) {
-        for (auto j = 1U; j < arr.size(); ++j) {
-            if (arr[j - 1] > arr[j]) {
-                std::swap(arr[j - 1], arr[j]);
-            }
+    for (auto i = 1U; i < arr.size(); ++i) {
+        for (auto j = i; j > 0U && arr[j - 1U] > arr[j]; --j) {
+                std::swap(arr[j - 1U], arr[j]);
         }
     }
 

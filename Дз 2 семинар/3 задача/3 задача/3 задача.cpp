@@ -15,9 +15,7 @@ std::size_t search(const std::vector<int>& v, int key) {
 		else if (key < v[mid]) {
 			right = mid - 1;
 		}
-		else {
-			return mid;
-		}
+		return mid;
 	}
 }
 
