@@ -1,7 +1,5 @@
 ﻿#include <iostream>
 #include <vector>
-#include <algorithm>
-#include <iterator>
 
 void merge_sort(std::vector<double>& mas);
 void merge_sort(std::vector<double>& mas, std::size_t mas_begin, std::size_t mas_end);
