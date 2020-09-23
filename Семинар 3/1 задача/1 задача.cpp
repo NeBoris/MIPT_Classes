@@ -1,12 +1,11 @@
 ﻿#include <iostream>
 #include <vector>
 #include <algorithm>
+#include <iterator>
 
-void merge_sort(std::vector<double>& v);
-std::vector<double> merge(const std::vector<double>& v1, const std::vector<double>& v2);
-
-
-
+void merge_sort(std::vector<double>& mas);
+void merge_sort(std::vector<double>& mas, std::size_t mas_begin, std::size_t mas_end);
+void merge(std::vector<double>& mas, std::size_t mas_begin, std::size_t mas_end);
 
 int main() {
 	int N;
@@ -23,89 +22,89 @@ int main() {
 
 	merge_sort(arr);
 
-	for (auto &c : arr) {
+	for (auto c : arr) {
 		std::cout << c << " ";
 	}
 
 	return 0;
 }
 
-
-void merge_sort(std::vector<double>& v) {
-	if (v.size() == 1) {
+void merge_sort(std::vector<double>& mas) {
+	if (mas.size() == 1) {
 		return;
 	}
 
-	std::size_t middle = v.size() / 2;
-	std::vector<double> temp(middle);
-	std::size_t N = 0U;
+	std::size_t middle = mas.size() / 2;
 
-	std::for_each(v.begin(), v.begin() + middle, [&temp, &N](auto c) {
-		temp[N] = c;
-		++N;
-		});
-	v.erase(v.begin(), v.begin() + middle);
+	merge_sort(mas, 0, middle);
+	merge_sort(mas, middle, mas.size());
 
-	//for (auto& c : v) {
-	//	std::cout << c << " ";
-	//}
-	//std::cout << '\n';
-	//for (auto& c : temp) {
-	//	std::cout << c << " ";
-	//}
-	//std::cout << '\n';
-	//std::cout << '\n';
-
-
-	merge_sort(v);
-	merge_sort(temp);
-
-	v = merge(v, temp);
+	merge(mas, 0, mas.size());
 }
 
 
+void merge_sort(std::vector<double>& mas, std::size_t mas_begin, std::size_t mas_end) {
+	if (mas_end - mas_begin == 1 || mas_end == mas_begin) {
+		return;
+	}
 
+	std::size_t middle = mas_begin + (mas_end - mas_begin) / 2;
 
-std::vector<double> merge(const std::vector<double>& v1, const std::vector<double>& v2) {
-	std::vector<double> result(v1.size() + v2.size());
+	//for (auto i = mas_begin; i < middle; ++i) {
+	//	std::cout << mas[i] << " ";
+	//}
+	//std::cout << '\n';
+	//for (auto i = middle; i < mas_end; ++i) {
+	//	std::cout << mas[i] << " ";
+	//}
+	//std::cout << '\n';
+	//std::cout << '\n';
 
-	auto i = 0U, j = 0U, k = 0U;
+	merge_sort(mas, mas_begin, middle);
+	merge_sort(mas, middle, mas_end);
 
-	while (i < v1.size() && j < v2.size() && k < result.size()) {
-		if (v1[i] > v2[j]) {
-			result[k] = v2[j];
-			++j;
-		}
-		else if (v1[i] < v2[j])
-		{
-			result[k] = v1[i];
+	merge(mas, mas_begin, mas_end);
+}
+
+void merge(std::vector<double>& mas, std::size_t left, std::size_t right) {
+	std::vector<double> result(right - left);
+
+	std::size_t middle = left + (right - left) / 2;
+	std::size_t i = left, j = middle, k = 0U;
+
+	for (; i < middle && j < right; ++k) {
+		if (mas[i] < mas[j]) {
+			result[k] = mas[i];
 			++i;
+		}
+		else if(mas[i] > mas[j]){
+			result[k] = mas[j];
+			++j;
 		}
 		else {
-			result[k + 1] = result[k] = v1[i];
-			++k;
+			result[k + 1] = result[k] = mas[i];
 			++i;
 			++j;
 		}
-
-		++k;
 	}
+	
+	for (; i < middle && k < result.size(); ++i, ++k)
+		result[k] = mas[i];
+	
 
-	if (i != v1.size()) {
-		for (; i < v1.size() && k < result.size(); ++i, ++k)
-			result[k] = v1[i];
-	}
+	for (; j < right && k < result.size(); ++j, ++k)
+		result[k] = mas[j];
 
-	if (j != v2.size()) {
-		for (; j < v2.size() && k < result.size(); ++j, ++k)
-			result[k] = v2[j];
-	}
+
+	for (auto c = left; c < right; ++c) 
+		mas[c] = result[c - left];
+
+	
 
 	//std::cout << "\n*******************************************\n";
-	//for (auto& c : result) {
-	   // std::cout << c << " ";
+	//for (auto c : result) {
+	//    std::cout << c << " ";
 	//}
 	//std::cout << "\n*******************************************\n";
 
-	return result;
 }
