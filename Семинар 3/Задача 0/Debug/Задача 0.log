@@ -1,0 +1,6 @@
+﻿  Задача 0.cpp
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 3\Задача 0\Задача 0.cpp(30,17): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 3\Задача 0\Задача 0.cpp(36,33): error C2668: u: неоднозначный вызов перегруженной функции
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 3\Задача 0\Задача 0.cpp(29,6): message : может быть "void u(int,std::function<double (float)>)"
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 3\Задача 0\Задача 0.cpp(25,6): message : или       "void u(int,std::function<double (double)>)"
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 3\Задача 0\Задача 0.cpp(36,33): message : при попытке сопоставить список аргументов "(int, main::<lambda_be798fe1e6cccf7b59d8df7802b65d82>)"
