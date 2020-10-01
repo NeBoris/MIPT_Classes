@@ -14,6 +14,8 @@ struct time {
 		result << hours << ":" << minutes << ":" << seconds << ":" << milliseconds;
 		return result.str();
 	}
+	
+	~time(){}
 
 	unsigned int hours : 5;
 	unsigned int minutes : 6;
