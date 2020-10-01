@@ -19,6 +19,8 @@ struct time {
 		result << year << ":" << month << ":" << day << "     " << hours << ":" << minutes << ":" << seconds << ":" << milliseconds;
 		return result.str();
 	}
+	
+	~time(){}
 
 	unsigned int year;
 	unsigned int month : 4;

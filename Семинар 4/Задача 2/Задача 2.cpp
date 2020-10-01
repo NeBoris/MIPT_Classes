@@ -16,7 +16,9 @@ struct Course {
 
 		}
 	}
-
+	
+	~Course(){}
+	
 	std::string name;
 	std::vector<Student*> members;
 };
@@ -41,7 +43,8 @@ struct Student {
 			std::cout << c->name;
 		}
 	}
-
+	
+	~Student(){}
 
 	std::string name;
 	std::string last_name;
