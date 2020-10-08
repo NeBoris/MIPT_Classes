@@ -1,0 +1,3 @@
+﻿  main.cpp
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ "int __cdecl func(int,int)" (?func@@YAHHH@Z) в функции _main.
+C:\Users\Boris\source\repos\NeBoris\MIPT_Classes\Семинар 5\4 задача 2 вариант\Debug\4 задача 2 вариант.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
