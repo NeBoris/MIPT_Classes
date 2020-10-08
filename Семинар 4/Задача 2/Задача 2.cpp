@@ -13,7 +13,7 @@ struct Course {
 
 	void print_students() {
 		for (auto& c : members) {
-
+			std::cout << с->name << " " << c->last_name << std::endl;
 		}
 	}
 	
