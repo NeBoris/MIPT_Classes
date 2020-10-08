@@ -1,2 +1,0 @@
-C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Debug\Gauss.exe
-C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Debug\Gauss.pdb

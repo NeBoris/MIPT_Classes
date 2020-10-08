@@ -1,0 +1,7 @@
+﻿  4 задача.cpp
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Дз 2 семинар\4 задача\4 задача.cpp(45,23): warning C4267: аргумент: преобразование из "size_t" в "_Elem"; возможна потеря данных
+          with
+          [
+              _Elem=char
+          ]
+  4 задача.vcxproj -> C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Дз 2 семинар\4 задача\Debug\4 задача.exe

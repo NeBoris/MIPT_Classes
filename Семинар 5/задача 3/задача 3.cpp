@@ -1,32 +1,37 @@
 ﻿#include <iostream>
 
-void get_value1(example value);
-
-class example {
+class exxxample {
 public:
-	class Key {
-		friend void get_value1(int value);
-		Key();
+	class Keey {
+	private:
+		Keey() {};
+		friend int get_sum(exxxample& k);
 	};
-
-	void Access(const Key&) {
-		get_value1 (value1);
+	int get_v1(const Keey&) const{
+		return v1;
 	}
-
+	int get_v2(const Keey&) const {
+		return v2;
+	}
 private:
-	int value1 = 13;
-	int value2 = 14;
-	int value3 = 15;
+	int v1 = 13;
+	int v2 = 14;
+	int v3 = 16;
+
 };
 
-void get_value1(example value) {
-	std::cout << value << std::endl;
+
+int get_sum(exxxample& k) {
+	exxxample::Keey b;
+
+	return k.get_v1(b) + k.get_v2(b);
 }
 
+
 int main() {
-	example b;
+	exxxample b;
 
-
+	std::cout << get_sum(b);
 
 
 	return 0;
