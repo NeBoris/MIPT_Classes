@@ -2,10 +2,19 @@
 #include <string>
 #include "Header.hpp"
 
+enum class Command{
+	Add,
+	Take,
+	Ret,
+	Owners_List,
+	Books,
+	Quit
+}
 
 int main() {
 	std::string name1, name2;
-	int command;
+	Command command;
+	int b;
 	Library lib;
 	bool flag = false;
 
@@ -18,34 +27,35 @@ int main() {
 	
 
 	while(true){
-		std::cin >> command;
-
+		std::cin >> b;
+		command = static_cast<Command> (b);
+		
 		switch (command)
 		{
-		case 1:
+		case Command::Add:
 			std::cout << "Please, enter its name: ";
 			std::cin >> name1;
 			lib.add_book(name1);
 			break;
-		case 2:
+		case Command::Take:
 			std::cout << "Please, enter its name and yours: ";
 			std::cin >> name1 >> name2;
 			lib.take_book(name1, name2);
 			break;
-		case 3:
+		case Command::Ret:
 			std::cout << "Please, enter its name: ";
 			std::cin >> name1;
 			lib.return_book(name1);
 			break;
-		case 4:
+		case Command::Owners_List:
 			std::cout << "Please, enter its name: ";
 			std::cin >> name1;
 			lib.get_previous_owners(name1);
 			break;
-		case 5:
+		case Command::Books:
 			lib.get_list();
 			break;
-		case 6:
+		case Command::Quit:
 			flag = true;
 			break;
 		default:
