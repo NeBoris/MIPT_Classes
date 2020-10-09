@@ -2,9 +2,6 @@
 #include <string>
 #include <vector>
 
-static int c_in_2power = 9;
-static int power = 11;
-
 enum class ed_izm {
 	sm,
 	Far
@@ -33,6 +30,8 @@ public:
 private:
 	double value;
 	ed_izm x;
+	static int c_in_2power = 9;
+	static int power = 11;
 };
 
 
