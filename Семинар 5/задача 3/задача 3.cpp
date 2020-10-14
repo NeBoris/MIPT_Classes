@@ -1,16 +1,17 @@
 ﻿#include <iostream>
 
-void get_value1(example value);
 
 class example {
 public:
 	class Key {
-		friend void get_value1(int value);
+	private:
+		friend void get_value1(int c, const example& value);
+	public:
 		Key();
 	};
 
-	void Access(const Key&) {
-		get_value1 (value1);
+	int Access(example::Key) const {
+		return value1;
 	}
 
 private:
@@ -19,15 +20,16 @@ private:
 	int value3 = 15;
 };
 
-void get_value1(example value) {
-	std::cout << value << std::endl;
+void get_value1(int c, const example& value) {
+	example::Key b;
+	std::cout << c * value.Access( b ) << std::endl;
 }
 
 int main() {
 	example b;
 
 
-
+	get_value1(2, b);
 
 	return 0;
 }

@@ -1,0 +1,3 @@
+﻿  задача 3.cpp
+задача 3.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall example::Key::Key(void)" (??0Key@example@@QAE@XZ) в функции "void __cdecl get_value1(int,class example const &)" (?get_value1@@YAXHABVexample@@@Z).
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 5\задача 3\Debug\задача 3.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
