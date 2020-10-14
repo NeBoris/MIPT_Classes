@@ -1,4 +1,4 @@
 #pragma once
-#include <iostream>
 
-int func(int a, int b);
+extern int a;
+extern void finc();

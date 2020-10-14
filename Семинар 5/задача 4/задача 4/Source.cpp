@@ -1,5 +1,4 @@
 #include <iostream>
+#include "Header.hpp"
 
-int func(int a, int b) {
-	return a + b;
-}
+int a = 16;

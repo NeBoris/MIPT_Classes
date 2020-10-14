@@ -2,36 +2,35 @@
 #include <string>
 #include <vector>
 
-enum class ed_izm {
-	sm,
-	Far
-};
-
 class Capacitance {
 public:
 
 	Capacitance(double new_value, int i) : 
-		value(new_value), x(static_cast< ed_izm > (i) ) {}
+		value(new_value), x(i) {}
 
 	void convert_to_sgs() {
-		value *= c_in_2power * power;
-		x = static_cast<ed_izm> (2);
+		if (x == 1) {
+			value *= c_in_2power * power;
+			x = 2;
+		}
 	}
 
 	void convert_to_si() {
-		value /= c_in_2power * power;
-		x = static_cast<ed_izm> (1);
+		if (x == 2) {
+			value /= c_in_2power * power;
+			x = 1;
+		}
 	}
 	friend std::ostream& operator<< (std::ostream& stream, const Capacitance& k) {
-		stream << k.value << (k.x == static_cast<ed_izm> (1) ? " Far" : " sm");
+		stream << k.value << (k.x == 1 ? " Far" : " sm");
 		return stream;
 	}
 
 private:
 	double value;
-	ed_izm x;
-	static int c_in_2power = 9;
-	static int power = 11;
+	int x;
+	static const int c_in_2power = 9;
+	static const int power = 11;
 };
 
 

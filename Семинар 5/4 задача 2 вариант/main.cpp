@@ -1,10 +1,12 @@
-#include <iostream>
 #include "Header.hpp"
 
+static int a;
+void finc();
+//a = 15;
+
 int main() {
-	func(10, 54);
+	a = 14;
+	finc();
 
 	return 0;
 }
-
-//добавить определение функции func
