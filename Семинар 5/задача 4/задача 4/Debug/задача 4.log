@@ -1,0 +1,5 @@
+﻿  main.cpp
+  Source.cpp
+  Создание кода...
+Source.obj : error LNK2005: "int a" (?a@@3HA) уже определен в main.obj
+C:\Users\Boris\Source\Repos\NeBoris\MIPT_Classes\Семинар 5\задача 4\Debug\задача 4.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более

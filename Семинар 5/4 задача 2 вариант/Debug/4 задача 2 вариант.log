@@ -1,0 +1,5 @@
+﻿  Source.cpp
+  main.cpp
+  Создание кода...
+Source.obj : error LNK2001: неразрешенный внешний символ "int a" (?a@@3HA).
+C:\Users\Boris\source\repos\NeBoris\MIPT_Classes\Семинар 5\4 задача 2 вариант\Debug\4 задача 2 вариант.exe : fatal error LNK1120: неразрешенных внешних элементов: 1

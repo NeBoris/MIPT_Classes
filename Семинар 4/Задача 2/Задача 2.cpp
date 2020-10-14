@@ -11,12 +11,6 @@ struct Course {
 	Course(const std::string new_name) :
 		name(new_name) {}
 
-	void print_students() {
-		for (auto& c : members) {
-			std::cout << с->name << " " << c->last_name << std::endl;
-		}
-	}
-	
 	~Course(){}
 	
 	std::string name;

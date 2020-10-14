@@ -1,2 +1,4 @@
 C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 5\Задача 2\Debug\Задача 2.exe
 C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 5\Задача 2\Debug\Задача 2.pdb
+C:\Users\Boris\Source\Repos\NeBoris\MIPT_Classes\Семинар 5\Задача 2\Debug\Задача 2.exe
+C:\Users\Boris\Source\Repos\NeBoris\MIPT_Classes\Семинар 5\Задача 2\Debug\Задача 2.pdb
