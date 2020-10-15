@@ -137,7 +137,12 @@ namespace use {
 	
 
 	std::ostream& operator<<(std::ostream& stream, const Rational& r) {
-		stream << r.m_numerator << " / " << r.m_denominator;
+		if (r.m_denominator == 1) {
+			stream << r.m_numerator;
+		}
+		else {
+			stream << r.m_numerator << " / " << r.m_denominator;
+		}
 		return stream;
 	}
 	std::istream& operator>>(std::istream& stream, Rational& r) {

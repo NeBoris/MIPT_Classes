@@ -2,7 +2,7 @@
 #include "Rational.hpp"
 
 int main() {
-	use::Rational R(7,14);
+	use::Rational R(14,7);
 	std::cout << R << std::endl;
 
 	use::Rational B;
