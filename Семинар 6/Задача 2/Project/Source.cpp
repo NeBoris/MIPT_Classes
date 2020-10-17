@@ -6,11 +6,10 @@ namespace use {
 		return (double)m_numerator / (double)m_denominator;
 	}
 	Rational::Rational():
-		m_numerator(0), m_denominator(1), m_doub(0){}
-	Rational::Rational(const Rational& a) :
-		m_numerator(a.m_numerator), m_denominator(a.m_denominator), m_doub(a.m_doub){}
+		m_numerator(0), m_denominator(1){}
+	Rational::Rational(const Rational& a) = default;
 	Rational::Rational(const int& a) :
-		m_numerator(a), m_denominator(1), m_doub(a){}
+		m_numerator(a), m_denominator(1){}
 	Rational::Rational(double a) 
 	{
 		int b = 1;
@@ -23,9 +22,8 @@ namespace use {
 		m_numerator = int(a);
 		m_denominator = b;
 		simplify();
-		m_doub = double(*this);
 	}
-	Rational::Rational(const int& a, const int& b) {
+	Rational::Rational(const int a, const int b) {
 		if (b == 0) {
 			return;
 		}
@@ -39,7 +37,6 @@ namespace use {
 			m_numerator = a;
 		}
 		simplify();
-		m_doub = double(*this);
 	}
 
 
@@ -56,86 +53,68 @@ namespace use {
 
 	}
 
-	Rational& Rational::operator=(const Rational& a) {
-		m_numerator = a.m_numerator;
-		m_denominator = a.m_denominator;
-		m_doub = double(*this);
-		return *this;
-	}
+	Rational& Rational::operator=(const Rational& a) = default;
 	Rational& Rational::operator=(Rational&& a) = default;
 
 	Rational operator+(const Rational & a, const Rational & b) {
 		Rational result(a);
 		result += b;
+		result.simplify();
 		return result;
 	}
 	Rational operator-(const Rational & a, const Rational & b) {
 		Rational result(a);
 		result -= b;
+		result.simplify();
 		return result;
 	}
 	Rational operator*(const Rational & a, const Rational & b) {
 		Rational result(a);
 		result *= b;
+		result.simplify();
 		return result;
 	}
 	Rational operator/(const Rational& a, const Rational& b) {
 		Rational result(a);
 		result /= b;
+		result.simplify();
 		return result;
 	}
 
 	// I thought for rational numbers the operation of increasing or decreasing by one is useless, so I will make it multiply or divide the number by 10
 
 	Rational& Rational::operator++() {
-		this->m_numerator *= 10;
-		this->m_doub = double(*this);
+		this->m_numerator += this->m_denominator;
+		simplify();
 		return *this;
 	}
 	Rational& Rational::operator--() {
-		this->m_denominator *= 10;
-		this->m_doub = double(*this);
+		this->m_numerator -= this->m_denominator;
+		simplify();
 		return *this;
 	}
-	Rational&& Rational::operator++(int) {
-		Rational temp(this->m_numerator, this->m_denominator);
-		this->m_numerator *= 10;
-		this->m_doub = double(*this);
-		return std::move(temp);
+	Rational& Rational::operator++(int) {
+		Rational temp(this->m_numerator + this->m_denominator, this->m_denominator);
+		return temp;
 	}
-	Rational&& Rational::operator--(int) {
-		Rational temp(this->m_numerator, this->m_denominator);
-		this->m_denominator *= 10;
-		this->m_doub = double(*this);
-		return std::move(temp);
+	Rational& Rational::operator--(int) {
+		Rational temp(this->m_numerator - this->m_denominator, this->m_denominator);
+		return temp;
 	}
 
 	void Rational::operator+=(const Rational& a) {
 		*this = Rational(m_numerator*a.m_denominator + a.m_numerator*m_denominator, m_denominator * a.m_denominator);
-		m_doub = double(*this);
 	}
 	void Rational::operator-=(const Rational& a) {
 		*this = Rational(m_numerator * a.m_denominator - a.m_numerator * m_denominator, m_denominator * a.m_denominator);
-		m_doub = double(*this);
 	}
 	void Rational::operator/=(const Rational& a) {
 		*this = Rational(m_numerator * a.m_denominator, m_denominator * a.m_numerator);
-		m_doub = double(*this);
 	}
 	void Rational::operator*=(const Rational& a) {
 		*this = Rational(m_numerator * a.m_numerator, m_denominator * a.m_denominator);
-		m_doub = double(*this);
 	}
-
-	double Rational::get_double() const {
-		return m_doub;
-	}
-	double get_double(Rational&& a) {
-		return a.m_doub;
-	}
-
 	
-
 	std::ostream& operator<<(std::ostream& stream, const Rational& r) {
 		if (r.m_denominator == 1) {
 			stream << r.m_numerator;
@@ -165,6 +144,9 @@ namespace use {
 	
 	bool operator==(const Rational& lhs, const Rational& rhs){
 		return lhs.m_numerator == rhs.m_numerator && lhs.m_denominator == rhs.m_denominator;
+	}
+	bool operator!=(const Rational& lhs, const Rational& rhs) {
+		return lhs.m_numerator != rhs.m_numerator || lhs.m_denominator != rhs.m_denominator;
 	}
 	bool operator>(const Rational& lhs, const Rational& rhs) {
 		return lhs.m_numerator*rhs.m_denominator > rhs.m_numerator*lhs.m_denominator;

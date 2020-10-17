@@ -5,17 +5,8 @@ int main() {
 	use::Rational R(14,7);
 	std::cout << R << std::endl;
 
-	use::Rational B;
-
-	std::cin >> B;
-	std::cout << B << std::endl;
-
-	std::cout << R + B << std::endl;
-	std::cout << R - B << std::endl;
-	std::cout << R * B << std::endl;
-	std::cout << R / B << std::endl;
-
-	std::cout << (B+R).get_double() << std::endl;
+	R += use::Rational(5, 4);
+	std::cout << R << std::endl;
 
 
 

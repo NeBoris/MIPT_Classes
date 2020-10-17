@@ -14,6 +14,7 @@ namespace use {
 
 		~Example() = default;
 
+		friend std::ostream& operator<<(std::ostream& stream, const Example& a);
 
 		Example& operator=(const Example& other);
 		Example& operator=(Example&& other);

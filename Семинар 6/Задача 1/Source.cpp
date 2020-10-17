@@ -46,6 +46,17 @@ namespace use {
 		other.m_vec.clear();
 	}
 
+	std::ostream& operator<<(std::ostream& stream, const Example& a) {
+		for (auto i = 0U; i < a.m_size; ++i) {
+			stream << a.m_arr[i] << " ";
+		}
+		stream << '\n';
+		for (auto& c : a.m_vec) {
+			stream << c << " ";
+		}
+
+		return stream;
+	}
 
 	Example& Example::operator=(const Example& other) {
 		if (this == &other) return *this;
