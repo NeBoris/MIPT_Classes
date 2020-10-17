@@ -8,8 +8,8 @@ namespace use {
 		Example();
 		Example(int a);
 		Example(int* array, int its_size);
-		Example(std::vector<int> vec);
-		Example(const Example&);
+		Example(const std::vector<int>& vec);
+		Example(const Example& ex);
 		Example(Example&&);
 
 		~Example() = default;
@@ -20,6 +20,9 @@ namespace use {
 		Example& operator=(Example&& other);
 
 		Example& operator+=(const Example&);
+		Example& operator+=(int* a);
+		Example& operator+=(int size);
+		Example& operator+=(const std::vector<int>& vec);
 
 		friend bool operator==(const Example&, const Example&);
 

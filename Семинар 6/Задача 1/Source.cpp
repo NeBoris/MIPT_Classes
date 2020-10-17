@@ -25,7 +25,7 @@ namespace use {
 	}
 
 
-	Example::Example(std::vector<int> vec) :
+	Example::Example(const std::vector<int>& vec) :
 		m_vec(vec), m_arr(nullptr), m_size(0){}
 
 
@@ -107,6 +107,20 @@ namespace use {
 
 	Example& Example::operator+=(const Example& other) {
 		for (const auto& c : other.m_vec) {
+			m_vec.push_back(c);
+		}
+		return *this;
+	}
+	Example& Example::operator+=(int* a) {
+		m_arr = a;
+		return *this;
+	}
+	Example& Example::operator+=(int size) {
+		m_size = size;
+		return *this;
+	}
+	Example& Example::operator+=(const std::vector<int>& vec) {
+		for (const auto& c : vec) {
 			m_vec.push_back(c);
 		}
 		return *this;
