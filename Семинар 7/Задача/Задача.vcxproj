@@ -139,12 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FigureCount.hpp" />
+    <ClInclude Include="BaseClass.hpp" />
     <ClInclude Include="List_of_figures.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="figures.cpp" />
-    <ClCompile Include="Figure_count_realisation.cpp" />
+    <ClCompile Include="BaseRealisation.cpp" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
