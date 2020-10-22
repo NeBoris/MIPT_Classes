@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\Boris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 2\Project\Source.cpp(102): warning C4172: возвращение адреса локальной или временной переменной : temp
+C:\Users\Boris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 2\Project\Source.cpp(98): warning C4172: возвращение адреса локальной или временной переменной : temp
+  Project.vcxproj -> C:\Users\Boris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 2\Project\Debug\Project.exe

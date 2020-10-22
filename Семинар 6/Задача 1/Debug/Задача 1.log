@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  main.cpp
   Source.cpp
 C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 1\Source.cpp(5,28): error C2429: для функция языка "nested-namespace-definition" нужен флаг компилятора "/std:c++17"
@@ -55,3 +56,9 @@ C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача
 C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 1\Source.cpp(30,33): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
 C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 6\Задача 1\Source.cpp(30,33): error C2803: "operator -" должен иметь по крайней мере один формальный параметр типа класс
   Создание кода...
+=======
+﻿  Source.cpp
+  main.cpp
+  Создание кода...
+  Задача 1.vcxproj -> C:\Users\Boris\Source\Repos\NeBoris\MIPT_Classes\Семинар 6\Задача 1\Debug\Задача 1.exe
+>>>>>>> d6953e1dbe85584ecf302f53660b871210421273
