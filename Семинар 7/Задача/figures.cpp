@@ -7,24 +7,32 @@
 
 
 namespace Shape {
-	
-	Ellipse::Ellipse() :
-		m_a(0), m_b(0){}
+	Finite_figure::Finite_figure() {
+		m_fig_param_1 = 0;
+		m_fig_param_2 = 0;
+	}
 
-	Ellipse::Ellipse(int a, int b) :
-		m_a(a), m_b(b){}
 
+//class Ellipse (> Finite_figure)
+	Ellipse::Ellipse() = default;
+
+// a - big poluos, b - small poluos
+	Ellipse::Ellipse(int a, int b) {
+		m_fig_param_1 = a;
+		m_fig_param_2 = b;
+	}
+//main points to build particular ellipse
 	void Ellipse::get_points() {
 		points.push_back({ 0,0 });
-		points.push_back({ 0,m_b });
-		points.push_back({ 0,-m_b });
-		points.push_back({ m_a,0 });
-		points.push_back({ 0,-m_a });
+		points.push_back({ 0,m_fig_param_2 });
+		points.push_back({ 0,-m_fig_param_2 });
+		points.push_back({ m_fig_param_1,0 });
+		points.push_back({ -m_fig_param_1, 0 });
 	}
 
 	double Ellipse::perimetr() {
-		if (m_a + m_b != 0) {
-			double P = 4 * (area() + m_a - m_b) / (m_a + m_b);
+		if (m_fig_param_1 + m_fig_param_2 != 0) {
+			double P = 4 * (area() + m_fig_param_1 - m_fig_param_1) / (m_fig_param_1 + m_fig_param_1);
 			return P;
 		}
 		return 0;
@@ -32,10 +40,10 @@ namespace Shape {
 
 	double Ellipse::area() {
 		static const double PI = 3.141592653589793;
-		if (m_a == 0 || m_b == 0) {
+		if (m_fig_param_1 == 0 || m_fig_param_2 == 0) {
 			return 0;
 		}
-		return m_a * m_b * PI;
+		return m_fig_param_1 * m_fig_param_1 * PI;
 	}
 
 	void Ellipse::print(std::ostream& stream) {
@@ -55,11 +63,11 @@ namespace Shape {
 	}
 
 
-
+//Circle ( > Ellipse > Finit_figure)
 
 	Circle::Circle(int r) {
-		m_a = r;
-		m_b = r;
+		m_fig_param_1 = r;
+		m_fig_param_2 = r;
 	}
 
 	void Circle::print(std::ostream& stream) {
@@ -78,13 +86,13 @@ namespace Shape {
 	}
 
 
-
+//Polygon (> Finit_figure)
 
 	Polygon::Polygon() :
-		m_sides(0){}
+		m_sides(0), m_fig_param_3(0){}
 
 	Polygon::Polygon(const std::vector<double>& sides) :
-		m_sides(sides){}
+		m_sides(sides), m_fig_param_3(0){}
 
 	double Polygon::perimetr() {
 		double P = 0;
@@ -105,43 +113,39 @@ namespace Shape {
 
 
 	Triangle::Triangle() = default;
-
-	Triangle::Triangle(double a, double h) :
-		m_a(a), m_h(h), m_sin(0){}
-
-	Triangle::Triangle(double a, double b, double sin) :
-		m_sin(sin), m_a(0), m_h(0) {
+//side and a height
+	Triangle::Triangle(double a, double h) {
+		m_fig_param_1 = a;
+		m_fig_param_2 = h;
+	}
+//two sides and angel between
+	Triangle::Triangle(double a, double b, double sin) {
+		m_fig_param_3 = sin;
 		m_sides.push_back(a);
 		m_sides.push_back(b);
 		
 		points.push_back({ 0,0 });
 		points.push_back({ m_sides[0], 0 });
-		points.push_back({ m_sides[1] * sqrt(1 - m_sin * m_sin), m_sides[1] * m_sin });
+		points.push_back({ m_sides[1] * sqrt(1 - m_fig_param_3 * m_fig_param_3), m_sides[1] * m_fig_param_3 });
 	}
+//vector with sides' sizes
 	Triangle::Triangle(const std::vector<double>& sides) {
 		m_sides = sides;
+		m_sides.resize(3);
 	}
 
-	double Triangle::perimetr() {
-		if (m_sides.size() != 3) {
-			return 0;
-		}
-		double P = 0;
-		for (const auto c : m_sides) {
-			P += c;
-		}
-
-		return P;
-	}
 
 	double Triangle::area() {
-		if (m_h == 0 && m_sin != 0 && m_sides.size() == 2) {
-			return m_sin * m_sides[0] * m_sides[1] * 0.5;
+		//two sides and angel between
+		if (m_fig_param_2 == 0 && m_fig_param_3 != 0 && m_sides.size() == 2) {
+			return m_fig_param_3 * m_sides[0] * m_sides[1] * 0.5;
 		}
-		else if (m_a != 0 && m_h != 0 && m_sin == 0) {
-			return m_a * m_h * 0.5;
+		//side and a height
+		else if (m_fig_param_1 != 0 && m_fig_param_2 != 0 && (m_fig_param_3 == 0 || m_sides.size() < 2)) {
+			return m_fig_param_1 * m_fig_param_2 * 0.5;
 		}
-		else if (m_h == 0 && m_sin == 0 && m_sides.size() == 3) {
+		//Geron
+		else if (m_fig_param_2 == 0 && m_fig_param_3 == 0 && m_sides.size() == 3) {
 			double p2 = perimetr() / 2;
 			return sqrt( p2 * (p2 - m_sides[0]) * (p2 - m_sides[1]) * (p2 - m_sides[2]) );
 		}
@@ -158,31 +162,20 @@ namespace Shape {
 			}
 			stream << std::endl;
 		}
-		stream << std::setprecision(4)
-			<< std::left << std::setw(9) << "Perimetr: "
-			<< std::right << std::setw(11) << perimetr() << std::endl
-			<< std::left << std::setw(9) << "Area: "
+		stream << std::setprecision(4);
+		if (m_sides.size() == 3) {
+			stream << std::left << std::setw(9) << "Perimetr: "
+				<< std::right << std::setw(11) << perimetr() << std::endl;
+		}
+			stream << std::left << std::setw(9) << "Area: "
 			<< std::right << std::setw(11) << area() << std::endl;
 	}
 
-	
-	Quadrangle::Quadrangle() :
-		m_d1(0), m_d2(0), m_sin(0){}
-	Quadrangle::Quadrangle(const std::vector<double>& sides) :
-		m_d1(0), m_d2(0), m_sin(0) {
+//Quadrangle (> Polygon)
+	Quadrangle::Quadrangle() = default;
+	Quadrangle::Quadrangle(const std::vector<double>& sides){
 		m_sides = sides;
-	}
-
-	double Quadrangle::perimetr() {
-		if (m_sides.size() != 4) {
-			return 0;
-		}
-		double P = 0;
-		for (const auto c : m_sides) {
-			P += c;
-		}
-
-		return P;
+		m_sides.resize(4);
 	}
 
 	void Quadrangle::print(std::ostream& stream) {
@@ -193,44 +186,42 @@ namespace Shape {
 	}
 
 
-	
+//Parallelogram (> Quadrangle > Polygon)
 	Parallelogram::Parallelogram() = default;
 	Parallelogram::Parallelogram(const std::vector<double>& sides) {
-		m_sides = sides;
+		if (sides[0] == sides[2] && sides[1] == sides[3]) {
+			m_sides = sides;
+			m_sides.resize(4);
+		}
 	}
 	Parallelogram::Parallelogram(double a, double b, double sin) {
-		m_sin = sin;
+		m_fig_param_3 = sin;
 		for (int i = 0; i < 2; i++) {
 			m_sides.push_back(a);
 			m_sides.push_back(b);
 		}
 	}
 	Parallelogram::Parallelogram(double a, double h) {
-		m_d1 = a;
-		m_d2 = h;
+		m_fig_param_1 = a;
+		m_fig_param_2 = h;
 	}
 	
 	double Parallelogram::area() {
-		if (m_sin == 0 && !m_sides.empty()) {
-			return m_sides[0] * m_sides[1];
+		if (m_fig_param_3 != 0 && m_sides.size() >= 2) {
+			return m_sides[0] * m_sides[1] * m_fig_param_3;
 		}
-		else if (m_sin == 0 && m_sides.empty()) {
-			return m_d1 * m_d2;
+		else if (m_fig_param_3 == 0 && m_sides.empty()) {
+			return m_fig_param_1 * m_fig_param_2;
 		}
-		else if (m_sin != 0 && m_sides.empty()) {
-			return m_d1 * m_d2 * m_sin;
-		}
-		else {
-			return m_sides[0] * m_sides[1] * m_sin;
-		}
+		return 0;
 	}
 
 	void Parallelogram::get_points() {
-		if (m_sin != 0) {
+		if (m_fig_param_3 != 0) {
 			points.push_back({ 0,0 });
 			points.push_back({ m_sides[0], 0 });
-			points.push_back({ m_sides[1] * sqrt(1 - m_sin * m_sin), m_sides[1] * m_sin });
-			points.push_back({ m_sides[0] + m_sides[1] * sqrt(1 - m_sin * m_sin), m_sides[0] + m_sides[1] * m_sin });
+			points.push_back({ m_sides[1] * sqrt(1 - m_fig_param_3 * m_fig_param_3), m_sides[1] * m_fig_param_3 });
+			points.push_back({ m_sides[0] + m_sides[1] * sqrt(1 - m_fig_param_3 * m_fig_param_3), m_sides[0] + m_sides[1] * m_fig_param_3 });
 		}
 
 	}
@@ -253,17 +244,20 @@ namespace Shape {
 	}
 
 
-	
+//Rhombus (> parallelogram > Quadrangle > Polygon)
 	Rhombus::Rhombus() = default;
-	Rhombus::Rhombus(std::vector<double> sides) {
-		m_sides = sides;
+	Rhombus::Rhombus(const std::vector<double>& sides) {
+		if ((sides[0] == sides[1]) && (sides[1] == sides[2]) && (sides[2] == sides[3])) {
+			m_sides = sides;
+			m_sides.resize(4);
+		}
 	}
 	Rhombus::Rhombus(double d1, double d2) {
-		m_d1 = 0.5 * d1;
-		m_d2 = d2;
+		m_fig_param_1 = 0.5 * d1;
+		m_fig_param_2 = d2;
 	}
 	Rhombus::Rhombus(double a, double b, double sin) {
-		m_sin = sin;
+		m_fig_param_3 = sin;
 		for (int i = 0; i < 2; i++) {
 			m_sides.push_back(a);
 			m_sides.push_back(b);
@@ -288,10 +282,13 @@ namespace Shape {
 	}
 	
 
-
+//Rectangle (> Parallelogram > Quadrangle > Polygon)
 	Rectangle::Rectangle() = default;
-	Rectangle::Rectangle(std::vector<double> sides) {
-		m_sides = sides;
+	Rectangle::Rectangle(const std::vector<double>& sides) {
+		if (sides[0] == sides[2] && sides[1] == sides[3]) {
+			m_sides = sides;
+			m_sides.resize(4);
+		}
 	}
 	Rectangle::Rectangle(double a, double b) {
 		for (int i = 0; i < 2; i++) {
@@ -300,23 +297,26 @@ namespace Shape {
 		}
 	}
 	Rectangle::Rectangle(double d1, double d2, double sin) {
-		m_d1 = 0.5 * d1;
-		m_d2 = d2;
-		m_sin = sin;
+		m_fig_param_1 = d1;
+		m_fig_param_2 = d2;
+		m_fig_param_3 = sin;
 	}
 	
+	double Rectangle::area() {
+		if (!m_sides.empty()) {
+			return m_sides[0] * m_sides[1];
+		}
+		else {
+			return m_fig_param_1 * m_fig_param_2 * m_fig_param_3 * 0.5;
+		}
+	}
+
 	void Rectangle::get_points() {
 		if (!m_sides.empty()) {
 			points.push_back({ 0,0 });
 			points.push_back({ m_sides[0], 0 });
 			points.push_back({ 0, m_sides[1] });
 			points.push_back({ m_sides[0], m_sides[1] });
-		}
-		else if(m_sin == 0){
-			points.push_back({ 0,0 });
-			points.push_back({ m_d1, 0 });
-			points.push_back({ 0, m_d2 });
-			points.push_back({ m_d1, m_d2 });
 		}
 	}
 
@@ -337,9 +337,15 @@ namespace Shape {
 			<< std::right << std::setw(11) << area() << std::endl;
 	}
 
-
+//Square (> Rectangle > Parallelogram.....)
 	
 	Square::Square() = default;
+	Square::Square(const std::vector<double>& sides) {
+		if ((sides[0] == sides[1]) && (sides[1] == sides[2]) && (sides[2] == sides[3])) {
+			m_sides = sides;
+			m_sides.resize(4);
+		}
+	}
 	Square::Square(double a) {
 		for (int i = 0; i < 2; i++) {
 			m_sides.push_back(a);

@@ -1,18 +1,23 @@
 #pragma once
-#include "FigureCount.hpp"
+#include "BaseClass.hpp"
 #include <vector>
 
 namespace Shape {
 
-	class Finite : public Figure_c {
+	class Finite_figure : public Figure_c {
 	protected:
+		Finite_figure();	
 		virtual double perimetr() { return 0; };
 		virtual double area() { return 0; };
-		
+
+		//points for graph
 		std::vector<std::pair<double, double>> points;
+		
+		double m_fig_param_1;
+		double m_fig_param_2;
 	};
 
-	class Ellipse : public Finite {
+	class Ellipse : public Finite_figure {
 	public:
 		Ellipse();
 		Ellipse(int a, int b);
@@ -24,8 +29,6 @@ namespace Shape {
 
 		void print(std::ostream& stream);
 
-		double m_a;
-		double m_b;
 	};
 
 	class Circle : public Ellipse {
@@ -36,7 +39,7 @@ namespace Shape {
 		void print(std::ostream& stream);
 	};
 
-	class Polygon : public Finite {
+	class Polygon : public Finite_figure {
 	public:
 		Polygon();
 		Polygon(const std::vector<double>& sides);
@@ -45,6 +48,9 @@ namespace Shape {
 		void print(std::ostream& stream);
 		double perimetr();
 
+		double m_fig_param_3;
+
+//to save sides sizes
 		std::vector<double> m_sides;
 	};
 
@@ -56,13 +62,8 @@ namespace Shape {
 		Triangle(const std::vector<double>& sides);
 	protected:
 		double area();
-		double perimetr();
 
 		void print(std::ostream& stream);
-	private:
-		double m_a;
-		double m_h;
-		double m_sin;
 	};
 
 	class Quadrangle : public Polygon {
@@ -71,12 +72,7 @@ namespace Shape {
 		Quadrangle(const std::vector<double>& sides);
 
 	protected:
-		double perimetr();
 		void print(std::ostream& stream);
-
-		double m_d1;
-		double m_d2;
-		double m_sin;
 	};
 
 	class Parallelogram : public Quadrangle {
@@ -94,7 +90,7 @@ namespace Shape {
 	class Rhombus : public Parallelogram {
 	public:
 		Rhombus();
-		Rhombus(std::vector<double> sides);
+		Rhombus(const std::vector<double>& sides);
 		Rhombus(double d1, double d2);
 		Rhombus(double a, double b, double sin);
 	protected:
@@ -104,19 +100,21 @@ namespace Shape {
 	class Rectangle : public Parallelogram {
 	public:
 		Rectangle();
-		Rectangle(std::vector<double> sides);
+		Rectangle(const std::vector<double>& sides);
 		Rectangle(double a, double b);
 		Rectangle(double d1, double d2, double sin);
 	protected:
+		void draw_graph();
 		void get_points();
+		double area();
 		void print(std::ostream& stream);
 	};
 
 	class Square : public Rectangle {
 	public:
 		Square();
+		Square(const std::vector<double>& sides);
 		Square(double a);
-		//void draw_graph();
 	protected:
 		void print(std::ostream& stream);
 	};
