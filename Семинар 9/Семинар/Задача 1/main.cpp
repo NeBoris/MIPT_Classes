@@ -152,7 +152,8 @@ int main() {
         std::cout << arr2[i] << " ";
     }
     std::cout << std::endl;
-
+    
+    delete[] arr3;
 
     return 0;
 }
