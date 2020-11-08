@@ -157,12 +157,10 @@ namespace not_std {
 		}
 
 
-		std::ostream& print(std::ostream& stream)
+		void print(std::ostream& stream)
 		{
 			for (auto i = 0U; i < m_size; ++i)
 				stream << m_array[i] << " ";
-
-			return stream;
 		}
 
 		my_container operator=(const my_container& cont)
@@ -234,7 +232,9 @@ namespace not_std {
 template <typename T>
 std::ostream& operator<< (std::ostream& stream, const not_std::my_container<T>& cont)
 {
-	return cont.print(stream);;
+	cont.print(stream);
+
+	return stream;
 }
 
 template <typename T>
