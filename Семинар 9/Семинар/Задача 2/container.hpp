@@ -157,10 +157,10 @@ namespace not_std {
 		}
 
 
-		friend std::ostream& operator<< (std::ostream& stream, const my_container& cont)
+		std::ostream& print(std::ostream& stream)
 		{
-			for (auto i = 0U; i < cont.m_size; ++i)
-				stream << cont[i] << " ";
+			for (auto i = 0U; i < m_size; ++i)
+				stream << m_array[i] << " ";
 
 			return stream;
 		}
@@ -231,6 +231,11 @@ namespace not_std {
 
 }
 
+template <typename T>
+std::ostream& operator<< (std::ostream& stream, const not_std::my_container<T>& cont)
+{
+	return cont.print(stream);;
+}
 
 template <typename T>
 void swap(not_std::my_container<T>& lhs, not_std::my_container<T>& rhs) noexcept{
