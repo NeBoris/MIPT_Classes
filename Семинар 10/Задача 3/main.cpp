@@ -1,30 +1,26 @@
 #include <iostream>
-#include <thread>
 
-template <typename FUNC>
-void make_function(FUNC f){}
 
-template <typename FUNC, typename T, typename ... Types>
-void make_function(FUNC f, T arg, Types ... args)
+template <typename FUNC, typename ... Types>
+void make_function(FUNC f, Types ... args)
 {
-	f(arg);
-	make_function(f, args...);
+	f(args...);
 }
 
 
-
-void print(int arg)
+template <typename ... T>
+void print(T ... args)
 {
-	std::cout << arg << " ";
+	(std::cout << ... << args);
 }
 
 int main()
 {
-	make_function([](int x) {std::cout << x + 1012 << " "; }, 1, 2, 3);
+	make_function([](int x, int y, int z) {std::cout << x + 1012 << " " << y << " " << z; }, 1, 2, 3);
 
 	std::cout << std::endl;
 
-	make_function(print, 1, 2, 3);
+	make_function(print<int, int, int>, 1, 2, 3);
 
 	return 0;
 }

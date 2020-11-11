@@ -6,7 +6,7 @@ class Figure
 public:
 	void print()
 	{
-		self()->print();
+		self()->m_print();
 	}
 private:
 	T* self()
@@ -17,13 +17,16 @@ private:
 
 class Circle : public Figure<Circle>
 {
-public:
-	Circle(int new_value) :
-		m_value(new_value) {}
-	void print()
+	friend class Figure<Circle>;
+private:
+	void m_print()
 	{
 		std::cout << m_value;
 	}
+
+public:
+	Circle(int new_value) :
+		m_value(new_value) {}
 private:
 	int m_value;
 };
@@ -34,5 +37,7 @@ int main()
 {
 	Circle c(13);
 
-	return;
+	c.print();
+
+	return 0;
 }
