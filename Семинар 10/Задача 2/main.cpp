@@ -3,42 +3,22 @@
 
 
 template <typename T>
-T g(std::size_t n) { return 0; }
-
-template <typename T, typename ... Types>
-T g(std::size_t n, T arg, Types... args)
+T* make_f(T arg)
 {
-	if(n == 0U)
-		return arg;
-	
-	return g<T>(n - 1, args...);
-}
-
-template <typename T, typename ... Types>
-T* make_f(Types... args)
-{
-	T* ret = new T[sizeof...(args)];
-	for (auto i = 0U; i < sizeof...(args); ++i)
-		ret[i] = g<T>(i, args...);
-
-
-	return ret;
+	return new T(arg);
 }
 
 int main()
 {
-	std::string* pr = make_f<std::string>("hello", "world", "!");
-	int* pr1 = make_f<int>(1, 2, 3);
+	std::string* pr = make_f(static_cast<std::string>("hello"));
+	int* pr1 = make_f(1);
 
-	for(auto i = 0U; i < 3; ++i)
-		std::cout << pr[i] << " ";
+	std::cout << *pr << std::endl;
 
-	std::cout << std::endl;
+	std::cout << *pr1;
 
-	for (auto i = 0U; i < 3; ++i)
-		std::cout << pr1[i] << " ";
-
-	delete[] pr;
+	delete pr;
+	delete pr1;
 
 
 	return 0;
