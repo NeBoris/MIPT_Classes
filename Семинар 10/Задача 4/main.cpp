@@ -4,6 +4,7 @@ class Fig_v
 {
 public:
 	virtual void print() = 0;
+	~Fig_v() = default;
 };
 
 class Circle_v : public Fig_v
@@ -16,6 +17,8 @@ public:
 	{
 		std::cout << radius << std::endl;
 	}
+
+	~Circle_v() = default;
 
 private:
 	int radius;
