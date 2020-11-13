@@ -44,6 +44,7 @@ private:
 
 class Circle : public Figure<Circle>
 {
+	friend class Figure<Circle>;
 private:
 	void m_print()
 	{
