@@ -1,2 +1,31 @@
 ﻿  main.cpp
-  Задача 2.vcxproj -> C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\Debug\Задача 2.exe
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(21,15): error C2664: "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(std::initializer_list<_Elem>,const _Alloc &)": невозможно преобразовать аргумент 2 из "void" в "const _Alloc &"
+          with
+          [
+              _Elem=char,
+              _Alloc=std::allocator<char>
+          ]
+          and
+          [
+              _Alloc=std::allocator<char>
+          ]
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(21,22): message : Выражение, имеющее тип void, нельзя преобразовать в другой тип
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\xstring(2280,5): message : см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string"
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(26): message : выполняется компиляция ссылки на экземпляр шаблон функции "RT *make_f<std::string,const char*,>(T)"
+          with
+          [
+              RT=std::string,
+              T=const char *
+          ]
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(21,15): error C2440: инициализация: невозможно преобразовать "initializer list" в "RT"
+          with
+          [
+              RT=int
+          ]
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(21,15): message : Инициализатор содержит слишком много элементов
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 10\Задача 2\main.cpp(27): message : выполняется компиляция ссылки на экземпляр шаблон функции "RT *make_f<int,int,>(T)"
+          with
+          [
+              RT=int,
+              T=int
+          ]
