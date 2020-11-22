@@ -1,27 +1,66 @@
 #include <iostream>
 
-template <bool Condition, typename _Ty = void>
-struct enable_if
+template <bool Condition, typename T = void>
+struct enable_if {};
+
+template <typename T>
+struct enable_if<std::true_type::value, T>
 {
-	using value = void*;
+	using type = T;
 };
 
-template <typename _Ty>
-struct enable_if<std::true_type::value, _Ty>
+template <bool Condition, typename T = void>
+using enable_if_t = typename enable_if<Condition, T>::type;
+
+
+
+#include <string>
+#include <utility>
+
+class Person
 {
-	using value = _Ty;
+public:
+
+	template < typename STR, typename Enable =
+		enable_if_t < std::is_convertible_v < STR, std::string > > >
+		explicit Person(STR&& str) : m_name(std::forward < STR >(str))
+	{
+		std::cout << "forward Person '" << m_name << "'\n";
+	}
+
+	Person(const Person& person) :
+		m_name(person.m_name)
+	{
+		std::cout << "COPY-CTOR Person '" << m_name << "'\n";
+	}
+
+	Person(Person&& p) :
+		m_name(std::move(p.m_name))
+	{
+		std::cout << "MOVE-CTOR Person '" << m_name << "'\n";
+	}
+
+	~Person() noexcept = default;
+
+private:
+
+	std::string m_name;
 };
 
-template <bool Condition, typename _Ty = void>
-using enable_if_t = typename enable_if<Condition, _Ty>::value;
 
-
-
-int main()
+int main(int argc, char** argv)
 {
-	std::cout << std::is_same_v<int, enable_if_t<std::true_type::value, int>  > << std::endl;
-	std::cout << std::is_same_v<int, enable_if_t<std::false_type::value, int>  > << std::endl;
+	
+	std::pair < int, double > p;
 
+	std::string s = "Ivan";
 
-	return 0;
+	Person p1(s);
+	Person p2("tmp");
+	Person p3(p1);
+	Person p4(std::move(p1));
+
+	system("pause");
+
+	return EXIT_SUCCESS;
 }
