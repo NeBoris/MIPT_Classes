@@ -19,7 +19,7 @@ constexpr double exp(int N)
 
 	for (auto i = 0; i < N; ++i)
 	{
-		value += 1/factorial(i);
+		value += 1.0/factorial(i);
 	}
 
 	return value;
