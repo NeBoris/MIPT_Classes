@@ -1,22 +1,22 @@
 #include <iostream>
 
 
-template <std::size_t N>
+template <int N>
 struct Fibonachi
 {
-	static const std::size_t value = Fibonachi<N - 1>::value + Fibonachi<N - 2>::value;
+	static const int value = Fibonachi<N - 1>::value + Fibonachi<N - 2>::value;
 };
 
 template <>
 struct Fibonachi<0>
 {
-	static const std::size_t value = 0;
+	static const int value = 0;
 };
 
 template <>
 struct Fibonachi<1>
 {
-	static const std::size_t value = 1;
+	static const int value = 1;
 };
 
 int main()
