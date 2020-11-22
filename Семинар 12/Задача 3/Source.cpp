@@ -3,7 +3,7 @@
 
 constexpr double factorial (int x)
 {
-	double value = 1;
+	int value = 1;
 
 	for (auto i = x; i >= 1; --i)
 	{
@@ -15,9 +15,9 @@ constexpr double factorial (int x)
 
 constexpr double exp()
 {
-	double value = 0;
+	double value = 0.0;
 
-	for (auto i = 0U; i < 20; ++i)
+	for (auto i = 0; i < 20; ++i)
 	{
 		value += 1/factorial(i);
 	}
