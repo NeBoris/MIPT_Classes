@@ -28,8 +28,12 @@ constexpr double exp(int N)
 
 int main()
 {
-	const int N = 20;
-	std::cout << std::fixed << std::setprecision(16) << exp(N) << std::endl;
+	constexpr int N = 20;
+
+	constexpr double res = exp(N);
+
+
+	std::cout << std::fixed << std::setprecision(16) << res << std::endl;
 
 	return 0;
 }

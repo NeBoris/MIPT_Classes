@@ -1,2 +1,5 @@
 ﻿  Source.cpp
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 12\Задача 3\Source.cpp(10,9): warning C4307: "*": переполнение целой константы со знаком
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 12\Задача 3\Source.cpp(22,25): message : при вычислении функции constexpr "factorial"
+C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 12\Задача 3\Source.cpp(33,28): message : при вычислении функции constexpr "exp"
   Задача 3.vcxproj -> C:\Users\NeBoris\source\repos\NeBoris\MIPT_Classes\Семинар 12\Задача 3\Debug\Задача 3.exe
