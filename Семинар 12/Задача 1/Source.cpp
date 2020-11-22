@@ -19,10 +19,16 @@ struct bin_coeff<arg, 0>
 	static const int value = 1;
 };
 
+template <>
+struct bin_coeff<0, 0>
+{
+	static const int value = 1;
+};
+
 
 int main()
 {
-	int g = bin_coeff<15, 2>::value;
+	int g = bin_coeff<0, 0>::value;
 
 	std::cout << g;
 
