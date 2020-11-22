@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-constexpr double factorial (int x)
+constexpr int factorial (int x)
 {
 	int value = 1;
 
@@ -13,11 +13,11 @@ constexpr double factorial (int x)
 	return value;
 }
 
-constexpr double exp()
+constexpr double exp(int N)
 {
 	double value = 0.0;
 
-	for (auto i = 0; i < 20; ++i)
+	for (auto i = 0; i < N; ++i)
 	{
 		value += 1/factorial(i);
 	}
@@ -28,7 +28,7 @@ constexpr double exp()
 
 int main()
 {
-	std::cout << std::fixed << std::setprecision(16) << exp() << std::endl;
+	std::cout << std::fixed << std::setprecision(16) << exp(N) << std::endl;
 
 	return 0;
 }
