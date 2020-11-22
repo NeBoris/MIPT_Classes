@@ -28,6 +28,7 @@ constexpr double exp(int N)
 
 int main()
 {
+	const int N = 20;
 	std::cout << std::fixed << std::setprecision(16) << exp(N) << std::endl;
 
 	return 0;
