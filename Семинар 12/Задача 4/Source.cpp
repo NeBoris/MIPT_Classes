@@ -1,39 +1,56 @@
 #include <iostream>
+#include <array>
 
-constexpr bool check_is_prime(int a, int k)
+
+template < int N>
+constexpr int prime()
 {
-	return (k > 1 ? ((a % k == 0 ? false : true) && check_is_prime(a, k - 1)) : true);
-}
+	std::array<int, N> arr = {};
+	arr[0] = 2;
 
-constexpr bool is_prime(int a)
-{
-	return check_is_prime(a, a / 2);
-}
-
-constexpr int prime(int a)
-{
-	int value = 1;
-
-	while (a != 0)
+	for (auto k = 0U; k < arr.size() - 1; ++k)
 	{
-		value++;
-		if (is_prime(value))
-			--a;
+		for (auto j = arr[k] + 1; ; ++j)
+		{
+
+
+
+			bool flag = true;
+			for (auto i = 0U; i <= k; ++i)
+			{
+				if (j % arr[i] == 0)
+				{
+					flag = false;
+					break;
+				}
+			}
+
+			if (flag == true)
+			{
+				arr[k + 1] = j;
+				break;
+			}
+			
+
+
+
+		}
 	}
 
-	return value;
+
+	return arr[N - 1];
 }
 
 
 int main()
 {
-	constexpr int a1 = prime(3);
-	constexpr int a2 = prime(4);
-	constexpr int a3 = prime(7);
-	constexpr int a4 = prime(13);
-	constexpr int a5 = prime(23);
-	constexpr int a6 = prime(25);
-	constexpr int a7 = prime(50);
+	constexpr int a1 = prime<3>();
+	constexpr int a2 = prime<4>();
+	constexpr int a3 = prime<7>();
+	constexpr int a4 = prime<13>();
+	constexpr int a5 = prime<23>();
+	constexpr int a6 = prime<25>();
+	constexpr int a7 = prime<50>();
 	
 
 	std::cout << "3(5): " << a1 << std::endl;
