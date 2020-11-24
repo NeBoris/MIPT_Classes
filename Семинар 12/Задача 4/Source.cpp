@@ -8,32 +8,14 @@ constexpr int prime()
 	std::array<int, N> arr = {};
 	arr[0] = 2;
 
-	for (auto k = 0U; k < arr.size() - 1; ++k)
+	for(auto k = 3; arr[arr.size() - 1] == 0; ++k)
 	{
-		for (auto j = arr[k] + 1; ; ++j)
+		unsigned int i = 0U;
+		for (; (arr[i] != 0) && (i < arr.size()) && (k % arr[i] != 0) ; ++i){}
+
+		if (arr[i] == 0)
 		{
-
-
-
-			bool flag = true;
-			for (auto i = 0U; i <= k; ++i)
-			{
-				if (j % arr[i] == 0)
-				{
-					flag = false;
-					break;
-				}
-			}
-
-			if (flag == true)
-			{
-				arr[k + 1] = j;
-				break;
-			}
-			
-
-
-
+			arr[i] = k;
 		}
 	}
 
