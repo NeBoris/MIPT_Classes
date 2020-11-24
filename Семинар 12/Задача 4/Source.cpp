@@ -8,10 +8,10 @@ constexpr int prime()
 	std::array<int, N> arr = {};
 	arr[0] = 2;
 
-	for(auto k = 3; arr[arr.size() - 1] == 0; ++k)
+	for(auto k = 3; arr[arr.back()] == 0; ++k)
 	{
 		unsigned int i = 0U;
-		for (; (arr[i] != 0) && (i < arr.size()) && (k % arr[i] != 0) ; ++i){}
+		for (; (i < arr.size()) && (arr[i] != 0) && (k % arr[i] != 0) ; ++i){}
 
 		if (arr[i] == 0)
 		{
